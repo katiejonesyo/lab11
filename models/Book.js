@@ -28,7 +28,7 @@ module.exports = class Book {
 
 
       return new Book(rows[0]);
-    }
+    };
 
     // Find
 
@@ -38,7 +38,7 @@ module.exports = class Book {
         );
 
       return rows.map(row => new Book(row));
-    }
+    };
 
 
     static async findById(id) {
@@ -51,30 +51,33 @@ module.exports = class Book {
 
       return new Book(rows[0])
       }
-    };
-
-//     // Update
-//     static async update(id, { mood, temp }) {
-//       const { rows } = await pool.query(
-//         `UPDATE kts
-//             SET
-//               mood=$1,
-//               temp=$2
-//             WHERE id=$3
-//             RETURNING *`,
-//         [ mood, temp , id]
-//       );
-
-//       return new Kts(rows[0]);
-//     }
     
 
-//      // Delete
-//      static async delete(id) {
-//       const { rows } = await pool.query(
-//         'DELETE FROM kts WHERE id=$1 RETURNING *',
-//         [id]);
+    // Update
+    static async update(id, { title, coverImage, rating, price, inStock  }) {
+      const { rows } = await pool.query(
+        `UPDATE books
+            SET
+              title=$1,
+              cover_image=$2,
+              rating=$3,
+              price=$4,
+              in_stock=$5
+            WHERE id=$6
+            RETURNING *`,
+        [ title, coverImage, rating, price, inStock, id]
+      )
+
+      return new Book(rows[0]);
+    };
+    
+
+     // Delete
+     static async delete(id) {
+      const { rows } = await pool.query(
+        'DELETE FROM books WHERE id=$1 RETURNING *',
+        [id]);
   
-//       return new Kts(rows[0]);
-//     }
-// };
+      return new Book(rows[0]);
+    }
+};
