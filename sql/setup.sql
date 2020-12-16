@@ -8,4 +8,5 @@ CREATE TABLE books (
     rating INTEGER NOT NULL,
     price INTEGER NOT NULL,
     in_stock BOOLEAN NOT NULL
-)
+);
+
