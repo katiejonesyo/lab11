@@ -10,3 +10,4 @@ process.on("exit", () => {
   console.log("Goodbye!");
   pool.end();
 });
+

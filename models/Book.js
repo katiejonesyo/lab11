@@ -78,6 +78,8 @@ module.exports = class Book {
         'DELETE FROM books WHERE id=$1 RETURNING *',
         [id]);
   
-      return new Book(rows[0]);
+        if(!rows[0]) throw new Error(`Book with id ${id} not found`);
+        else return new Book(rows[0]);
     }
 };
+
