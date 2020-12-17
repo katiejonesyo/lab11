@@ -20,10 +20,10 @@ module.exports = class Book {
     }
     
     // Create
-    static async insert({ title, coverImage, rating, price, inStock = [] }) {
+    static async insert(book) {
       const { rows } = await pool.query(
         'INSERT INTO books (title, cover_image, rating, price, in_stock) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-        [title, coverImage, rating, price, inStock]
+        [book.title, book.coverImage, book.rating, book.price, book.inStock]
       );
 
 
